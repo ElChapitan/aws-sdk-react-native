@@ -19,6 +19,9 @@
     AWSCognitoCredentialsProvider *credentialProvider;
     NSLock* lock;
     AWSRNHelper *helper;
+    
+    NSDictionary<NSString*,NSString*> *authTokens;
+
 }
 
 @synthesize bridge = _bridge;
@@ -66,7 +69,8 @@ RCT_EXPORT_METHOD(getCredentialsAsync:(RCTPromiseResolveBlock)resolve rejecter:(
         }
         else {
             AWSCredentials *cred = (AWSCredentials*) task.result;
-            NSDictionary *dict = @{@"AccessKey":cred.accessKey,@"SecretKey":cred.secretKey,@"SessionKey":cred.sessionKey,@"Expiration":cred.expiration};
+            NSNumber *expirationTimestamp = [NSNumber numberWithLong:cred.expiration.timeIntervalSince1970 * 1000.0];
+            NSDictionary *dict = @{@"AccessKey":cred.accessKey,@"SecretKey":cred.secretKey,@"SessionKey":cred.sessionKey,@"Expiration":expirationTimestamp};
             resolve(dict);
         }
         return nil;
@@ -112,25 +116,15 @@ RCT_EXPORT_METHOD(initWithOptions:(NSDictionary *)inputOptions)
     [AWSServiceManager defaultServiceManager].defaultServiceConfiguration = configuration;
 }
 
-#pragma mark - AWSIdentityProviderManager
+RCT_EXPORT_METHOD(setTokens:(NSDictionary *)reactLogins)
+{
+    NSMutableDictionary* convertedLogins = [self convertLogins:reactLogins];
+    authTokens = convertedLogins;
+}
 
-- (AWSTask<NSDictionary<NSString *, NSString *> *> *)logins{
-    if (!lock){
-        lock = [[NSLock alloc]init];
-    }
-    return [[AWSTask taskWithResult:nil] continueWithSuccessBlock:^id _Nullable(AWSTask * _Nonnull task) {
-        __block NSArray* arr;
-        [self sendMessage:[[NSMutableDictionary alloc]init] toChannel:@"LoginsRequestedEvent" withCallback:^(NSArray* response){
-            arr = response;
-            [lock unlock];
-        }];
-        [lock lock];
-        [lock unlock];
-        if (![[arr objectAtIndex:0]isKindOfClass:[NSDictionary class]]){
-            return [[NSDictionary alloc]init];
-        }
-        return [self setLogins:[arr objectAtIndex:0]];
-    }];
+#pragma mark - AWSIdentityProviderManager
+- (AWSTask<NSDictionary<NSString*, NSString*> *> *) logins {
+    return [AWSTask taskWithResult:authTokens];
 }
 
 #pragma mark - Helper Methods
