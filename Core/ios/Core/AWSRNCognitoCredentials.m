@@ -151,7 +151,7 @@ RCT_EXPORT_METHOD(setTokens:(NSDictionary *)reactLogins)
      ];
 }
 
--(NSMutableDictionary*)setLogins:(NSMutableDictionary*)reactLogins{
+-(NSMutableDictionary*)convertLogins:(NSMutableDictionary*)reactLogins{
     NSMutableDictionary *logins = [[NSMutableDictionary alloc]init];
     for (NSString* key in reactLogins){
         if ([key isEqualToString:@"FacebookProvider"]){
