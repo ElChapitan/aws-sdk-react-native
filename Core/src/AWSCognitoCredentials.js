@@ -165,10 +165,6 @@ clear(){
  * InstanceOfAWSCognitoCredentials.setLogins(map); //ignored for iOS
 */
 setLogins(Logins){
-  if (Platform.OS === 'ios'){
-    console.log("Set Logins ignored for iOS")
-    return;
-  }
   if(typeof(Logins)=='object' && Object.keys(Logins).length !== 0){
     if(Platform.OS === 'ios'){
       cognitoClient.setTokens(Logins);
