@@ -1,17 +1,27 @@
-
 {
-  "name": "react-native-mobile-analytics",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "name": "aws-sdk-react-native-mobile-analytics",
+  "version": "0.0.1",
+  "description": "A React Native wrapper for AWS Mobile Analytics SDK",
+  "main": "src/index.js",
+  "files": [
+    "android/",
+    "ios/",
+    "src/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/awslabs/aws-sdk-react-native.git"
   },
   "keywords": [
-    "react-native"
+    "aws",
+    "aws mobile",
+    "react-native",
+    "react",
+    "native",
+    "analytics"
   ],
-  "author": "",
-  "license": "",
+  "author": "Amazon Web Services",
+  "license": "Apache-2.0",
   "peerDependencies": {
     "react-native": "^0.29.0"
   }

@@ -9,6 +9,8 @@ import com.facebook.react.bridge.ReactMethod;
 
 import com.amazonaws.mobileconnectors.amazonmobileanalytics.*;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.ReadableMapKeySetIterator;
+
 
 public class AWSRNMobileAnalyticsModule extends ReactContextBaseJavaModule {
 
@@ -50,6 +52,51 @@ public class AWSRNMobileAnalyticsModule extends ReactContextBaseJavaModule {
         } catch (InitializationException ex) {
             Log.e(LOG_STRING, "Failed to initialize Amazon Mobile Analytics", ex);
         }
+    }
 
+    @ReactMethod
+    public void createEvent(String eventName, ReadableMap attributes, ReadableMap metrics){
+        final AnalyticsEvent eventToRecord = analytics.getEventClient().createEvent(eventName);
+
+        if (attributes != null) {
+            ReadableMapKeySetIterator keyiter = attributes.keySetIterator();
+            while(keyiter.hasNextKey()){
+                String key = keyiter.nextKey();
+                String value = attributes.getString(key);
+                eventToRecord.withAttribute(key, value);
+            }
+        }
+
+        if (attributes != null) {
+            ReadableMapKeySetIterator iterator = metrics.keySetIterator();
+            while(iterator.hasNextKey()){
+                String key = iterator.nextKey();
+                double value = metrics.getDouble(key);
+                eventToRecord.withMetric(key, value);
+            }
+        }
+
+        analytics.getEventClient().recordEvent(eventToRecord);
+    }
+
+    @ReactMethod
+    public void submitEvents(){
+        if(analytics != null){
+            analytics.getEventClient().submitEvents();
+        }
+    }
+
+    @ReactMethod
+    public void pauseSession() {
+        if(analytics != null){
+            analytics.getSessionClient().pauseSession();
+        }
+    }
+
+    @ReactMethod
+    public void resumeSession() {
+        if(analytics != null){
+            analytics.getSessionClient().resumeSession();
+        }
     }
 }
