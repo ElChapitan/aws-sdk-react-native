@@ -3,6 +3,7 @@ package com.amazonaws.reactnative.mobileanalytics;
 
 import android.util.Log;
 
+import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -12,7 +13,7 @@ import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableMapKeySetIterator;
 
 
-public class AWSRNMobileAnalyticsModule extends ReactContextBaseJavaModule {
+public class AWSRNMobileAnalyticsModule extends ReactContextBaseJavaModule implements LifecycleEventListener {
 
     private static final String APP_ID = "app_id";
     private static final String IDENTITY_POOL_ID = "identity_pool_id";
@@ -25,6 +26,7 @@ public class AWSRNMobileAnalyticsModule extends ReactContextBaseJavaModule {
     public AWSRNMobileAnalyticsModule(ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
+        reactContext.addLifecycleEventListener(this);
     }
 
     @Override
@@ -98,5 +100,21 @@ public class AWSRNMobileAnalyticsModule extends ReactContextBaseJavaModule {
         if(analytics != null){
             analytics.getSessionClient().resumeSession();
         }
+    }
+
+    @Override
+    public void onHostResume() {
+        resumeSession();
+    }
+
+    @Override
+    public void onHostPause() {
+        submitEvents();
+        pauseSession();
+    }
+
+    @Override
+    public void onHostDestroy() {
+
     }
 }

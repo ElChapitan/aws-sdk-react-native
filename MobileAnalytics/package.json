@@ -21,8 +21,5 @@
     "analytics"
   ],
   "author": "Amazon Web Services",
-  "license": "Apache-2.0",
-  "peerDependencies": {
-    "react-native": "^0.29.0"
-  }
+  "license": "Apache-2.0"
 }
