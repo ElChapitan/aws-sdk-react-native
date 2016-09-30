@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B3E7B58A1CC2AC0600A0062D /* AWSRNMobileAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* AWSRNMobileAnalytics.m */; };
+		277578CC1D9EA7DF008C0718 /* AWSRNMobileAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 277578CB1D9EA7DF008C0718 /* AWSRNMobileAnalytics.m */; };
+		277578CE1D9EA82B008C0718 /* AWSMobileAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 277578CD1D9EA82B008C0718 /* AWSMobileAnalytics.framework */; };
+		277579121D9EB3C2008C0718 /* AWSCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 277579111D9EB3C2008C0718 /* AWSCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,8 +26,10 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libAWSRNMobileAnalytics.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAWSRNMobileAnalytics.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		B3E7B5881CC2AC0600A0062D /* AWSRNMobileAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWSRNMobileAnalytics.h; sourceTree = "<group>"; };
-		B3E7B5891CC2AC0600A0062D /* AWSRNMobileAnalytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWSRNMobileAnalytics.m; sourceTree = "<group>"; };
+		277578CA1D9EA7DF008C0718 /* AWSRNMobileAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AWSRNMobileAnalytics.h; path = Classes/AWSRNMobileAnalytics.h; sourceTree = "<group>"; };
+		277578CB1D9EA7DF008C0718 /* AWSRNMobileAnalytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AWSRNMobileAnalytics.m; path = Classes/AWSRNMobileAnalytics.m; sourceTree = "<group>"; };
+		277578CD1D9EA82B008C0718 /* AWSMobileAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSMobileAnalytics.framework; path = Frameworks/AWSMobileAnalytics.framework; sourceTree = "<group>"; };
+		277579111D9EB3C2008C0718 /* AWSCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSCore.framework; path = Frameworks/AWSCore.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +37,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				277578CE1D9EA82B008C0718 /* AWSMobileAnalytics.framework in Frameworks */,
+				277579121D9EB3C2008C0718 /* AWSCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,11 +53,29 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		277578C81D9EA785008C0718 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				277579111D9EB3C2008C0718 /* AWSCore.framework */,
+				277578CD1D9EA82B008C0718 /* AWSMobileAnalytics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		277578C91D9EA7D5008C0718 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				277578CA1D9EA7DF008C0718 /* AWSRNMobileAnalytics.h */,
+				277578CB1D9EA7DF008C0718 /* AWSRNMobileAnalytics.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-				B3E7B5881CC2AC0600A0062D /* AWSRNMobileAnalytics.h */,
-				B3E7B5891CC2AC0600A0062D /* AWSRNMobileAnalytics.m */,
+				277578C91D9EA7D5008C0718 /* Classes */,
+				277578C81D9EA785008C0718 /* Frameworks */,
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -112,7 +136,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3E7B58A1CC2AC0600A0062D /* AWSRNMobileAnalytics.m in Sources */,
+				277578CC1D9EA7DF008C0718 /* AWSRNMobileAnalytics.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,7 +176,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -186,7 +210,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -196,8 +220,12 @@
 		58B511F01A9E6C8500147676 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				HEADER_SEARCH_PATHS = (
-				"$(inherited)",
+					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
@@ -212,6 +240,10 @@
 		58B511F11A9E6C8500147676 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
