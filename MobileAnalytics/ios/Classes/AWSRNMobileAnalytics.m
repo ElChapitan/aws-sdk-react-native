@@ -32,14 +32,14 @@ RCT_EXPORT_METHOD(createEvent:(NSString*)eventType attributes:(NSDictionary*)eve
     id<AWSMobileAnalyticsEventClient> eventClient = analytics.eventClient;
     id<AWSMobileAnalyticsEvent> theEvent = [eventClient createEventWithEventType:eventType];
     
-    if(eventAttributes != null){
+    if(eventAttributes != nil){
         for(id key in eventAttributes) {
             id value = [eventAttributes objectForKey:key];
             [theEvent addAttribute:value forKey:key];
         }
     }
     
-    if(eventMetrics != null){
+    if(eventMetrics != nil){
         for(id key in eventMetrics) {
             id value = [eventMetrics objectForKey:key];
             [theEvent addMetric:value forKey:key];
