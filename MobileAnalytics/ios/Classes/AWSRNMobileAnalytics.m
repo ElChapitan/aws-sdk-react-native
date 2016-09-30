@@ -27,6 +27,31 @@ RCT_EXPORT_METHOD(initWithOptions:(NSDictionary *)inputOptions)
                         identityPoolId: identityPoolId];
 }
 
+RCT_EXPORT_METHOD(createEvent:(NSString*)eventType attributes:(NSDictionary*)eventAttributes metrics:(NSDictionary*)eventMetrics)
+{
+    id<AWSMobileAnalyticsEventClient> eventClient = analytics.eventClient;
+    id<AWSMobileAnalyticsEvent> theEvent = [eventClient createEventWithEventType:eventType];
+    
+    if(eventAttributes != null){
+        for(id key in eventAttributes) {
+            id value = [eventAttributes objectForKey:key];
+            [theEvent addAttribute:value forKey:key];
+        }
+    }
+    
+    if(eventMetrics != null){
+        for(id key in eventMetrics) {
+            id value = [eventMetrics objectForKey:key];
+            [theEvent addMetric:value forKey:key];
+        }
+    }
+    
+    [eventClient recordEvent:theEvent];
+    
+    
+}
+
+
 
 @end
   
