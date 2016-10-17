@@ -15,6 +15,7 @@ if (Platform.OS === 'ios'){
   listener = DeviceEventEmitter;
 }
 
+var initialized;
 export default class AWSMobileAnalytics {
 
   constructor(){
@@ -31,10 +32,15 @@ export default class AWSMobileAnalytics {
 
     console.log("creating the instance of AWSRNMobileAnalyticsModule");
     mobileAnalyticsClient.initWithOptions(options);
+    initialized = true;
   }
 
   createEvent(event_type, attributes, options){
     mobileAnalyticsClient.createEvent(event_type, attributes, options);
+  }
+
+  isInitialized() {
+    return initialized;
   }
 }
 

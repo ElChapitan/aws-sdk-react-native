@@ -1,6 +1,6 @@
 {
   "name": "aws-sdk-react-native-mobile-analytics",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A React Native wrapper for AWS Mobile Analytics SDK",
   "main": "src/index.js",
   "files": [
