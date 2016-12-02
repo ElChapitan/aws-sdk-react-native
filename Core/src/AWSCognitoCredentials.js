@@ -42,12 +42,7 @@ export default class AWSCognitoCredentials{
     this.RNC_AMAZON_PROVIDER = "AmazonProvider"
     this.RNC_TWITTER_PROVIDER = "TwitterProvider"
     this.RNC_COGNITO_PROVIDER = "CognitoProvider"
-    //set up delegate for IdentityProvider
-    if (Platform.OS === 'ios'){
-      listener.addListener("LoginsRequestedEvent", async event => {
-        event.ReturnInfo([this.getLogins()]);
-      });
-    }
+
     //Set up Notifications for Identity Changes
     listener.addListener("IdentityChange", async event => {
       if (!event.Previous){
@@ -170,12 +165,12 @@ clear(){
  * InstanceOfAWSCognitoCredentials.setLogins(map); //ignored for iOS
 */
 setLogins(Logins){
-  if (Platform.OS === 'ios'){
-    console.log("Set Logins ignored for iOS")
-    return;
-  }
   if(typeof(Logins)=='object' && Object.keys(Logins).length !== 0){
-    cognitoClient.setLogins(Logins);
+    if(Platform.OS === 'ios'){
+      cognitoClient.setTokens(Logins);
+    } else {
+      cognitoClient.setLogins(Logins);
+    }
   }else{
     console.log("Logins parameter is not a map, or it was empty: " + Logins)
   }
